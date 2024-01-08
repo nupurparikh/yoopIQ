@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sales Analysis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+        }
+        #graphContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Sales Analysis</h1>
+    <div style="text-align: center;">
+        <button id="generateYearButton">Generate Year Graph</button>
+        <button id="generateCountryButton">Generate Country Graph</button>
+        <button id="generatePieChartButton">Generate Pie Chart</button>
+    </div>
+
+    <div id="graphContainer">
+        <!-- Graph will be displayed here -->
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            $('#generateYearButton').click(function(){
+                $.get('/generate_year_graph', function(data){
+                    $('#graphContainer').html('<img src="data:image/png;base64,' + data + '">');
+                });
+            });
+
+            $('#generateCountryButton').click(function(){
+                $.get('/generate_country_graph', function(data){
+                    $('#graphContainer').html('<img src="data:image/png;base64,' + data + '">');
+                });
+            });
+
+            $('#generatePieChartButton').click(function(){
+                $.get('/generate_pie_chart', function(data){
+                    $('#graphContainer').html('<img src="data:image/png;base64,' + data + '">');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
